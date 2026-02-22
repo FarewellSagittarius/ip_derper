@@ -16,7 +16,7 @@ RUN cd /app/tailscale/cmd/tailscaled && \
 
 # build tailscale CLI
 RUN cd /app/tailscale/cmd/tailscale && \
-    CGO_ENABLED=0 go build -buildvcs=false -ldflags "-s -w" -o /app/tailscale
+    CGO_ENABLED=0 go build -buildvcs=false -ldflags "-s -w" -o /app/tailscale-cli
 
 FROM ubuntu:20.04
 WORKDIR /app
@@ -39,6 +39,6 @@ COPY build_cert.sh /app/
 COPY start.sh /app/
 COPY --from=builder /app/derper /app/derper
 COPY --from=builder /app/tailscaled /app/tailscaled
-COPY --from=builder /app/tailscale /app/tailscale
+COPY --from=builder /app/tailscale-cli /app/tailscale-cli
 
 CMD ["bash", "/app/start.sh"]

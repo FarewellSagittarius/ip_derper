@@ -10,7 +10,7 @@ if [ "$DERP_VERIFY_CLIENTS" = "true" ] && [ -n "$TAILSCALE_AUTHKEY" ]; then
     /app/tailscaled --state=/app/tailscaled.state --socket=/var/run/tailscale/tailscaled.sock --tun=userspace-networking &
     sleep 2
 
-    /app/tailscale --socket=/var/run/tailscale/tailscaled.sock up --authkey="$TAILSCALE_AUTHKEY" --hostname=derper
+    /app/tailscale-cli --socket=/var/run/tailscale/tailscaled.sock up --authkey="$TAILSCALE_AUTHKEY" --hostname=derper
     echo "Tailscale connected, client verification enabled."
 fi
 
